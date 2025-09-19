@@ -1,5 +1,3 @@
-#   я написал пару строчек и перехотел писать дальше потому-что я не понял свой же код
-
 from time import sleep
 from random import randint
 class Brainrot:    #    создаю класс персонажей
