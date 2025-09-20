@@ -1,4 +1,4 @@
-#from time import sleep
+from time import sleep
 from random import randint
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20):
