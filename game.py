@@ -12,10 +12,17 @@ BrBrPatapim = Brainrot(name="Бр бр патапим", cost=140, damage=40)
 CrocodiloBombordilo = Brainrot(name="Крокодило бомбордило", cost=220, damage=80)
 TralaleiloTralala = Brainrot(name="Тралалейло тралала", cost=80)
 
+
+DevMode = 0
 BrainrotsList = [BrBrPatapim, CrocodiloBombordilo, TralaleiloTralala]    #  список всех персонажей
 Inventory = []    # инвентарь
 Money = 100
 gold = 1
+
+def DevPrint(DevText, DevEnd):
+    global DevMode
+    if DevMode == 1:
+        print(f"{DevText}")
 
 def PrintInventory():   #   вывод инвентаря
     global gold
@@ -66,24 +73,47 @@ def Market():
             else:
                 print("У вас невисточає грошей")
 
+def battle():
+    global Money
+    global Inventory
+    if Inventory == []:
+        print("У вас немає брейнротів щоб битися")
+    else:
+        BattleEnemyVariable = BrainrotsList[randint(0,  len(BrainrotsList)-1)]
+        print(f"Ваш суперник: {BattleEnemyVariable.name}, здоров'я: {BattleEnemyVariable.hp}, сила: {BattleEnemyVariable.damage}")
+        while BattleEnemyVariable.hp > 0 or Inventory[0].hp > 0:
+            PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака"))
+            EnemyBattleInput = randint(1, 3)
+            if PlayerBattleInput == 1 and EnemyBattleInput != 2:
+                print()
+            
+        
+
 def MainMenu():
-    MainMenuInput=int(input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: "))
-    if MainMenuInput == 1:
+    global DevMode
+    MainMenuInput = input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: ")
+    if MainMenuInput == "1":
         sleep(1)
         PrintInventory()
         sleep(1)
-    elif MainMenuInput == 2:
+    elif MainMenuInput == "2":
         sleep(1)
         Market()
         sleep(1)
-    elif MainMenuInput == 3:
-        pass
-    elif MainMenuInput == 4:
+    elif MainMenuInput == "3":
+        battle()
+    elif MainMenuInput == "4":
         sleep(1)
         print("Номер карти: 5168 7520 #### 4667")
         sleep(1)
-    elif MainMenuInput == 5:
+    elif MainMenuInput == "5":
         pass
+    elif MainMenuInput == "Dev mode on":
+        DevMode = 1
+        DevPrint("Dev mode activated", "")
+    elif MainMenuInput == "Dev mode off":
+        DevMode = 0
+        DevPrint("Dev mode deactivated", "")
     else:
         pass
 
