@@ -19,7 +19,7 @@ Inventory = []    # инвентарь
 Money = 100
 gold = 1
 
-def DevPrint(DevText, DevEnd):
+def DevPrint(DevText):
     global DevMode
     if DevMode == 1:
         print(f"{DevText}")
@@ -80,14 +80,19 @@ def battle():
         print("У вас немає брейнротів щоб битися")
     else:
         BattleEnemyVariable = BrainrotsList[randint(0,  len(BrainrotsList)-1)]
+        BattleEnemyHp = BattleEnemyVariable.hp
+        BattlePlayerHp = Inventory[0].hp
+        sleep(1)
         print(f"Ваш суперник: {BattleEnemyVariable.name}, здоров'я: {BattleEnemyVariable.hp}, сила: {BattleEnemyVariable.damage}")
-        while BattleEnemyVariable.hp > 0 or Inventory[0].hp > 0:
-            PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака"))
+        while BattleEnemyHp > 0 and BattlePlayerHp > 0:
+            sleep(1)
+            PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака: "))
             EnemyBattleInput = randint(1, 3)
             if PlayerBattleInput == 1 and EnemyBattleInput != 2:
-                print()
-            
-        
+                DevPrint("enemy - {BattleEnemyVariable}.damage hp")
+                BattleEnemyHp = BattleEnemyHp - Inventory[0].damage
+                print(f"{BattleEnemyHp}")
+                print(f"Ваш суперник пропускає удар!")
 
 def MainMenu():
     global DevMode
@@ -110,10 +115,10 @@ def MainMenu():
         pass
     elif MainMenuInput == "Dev mode on":
         DevMode = 1
-        DevPrint("Dev mode activated", "")
+        DevPrint("Dev mode activated")
     elif MainMenuInput == "Dev mode off":
-        DevMode = 0
-        DevPrint("Dev mode deactivated", "")
+        DevPrint("Dev mode deactivated")
+        DevMode = 0        
     else:
         pass
 
