@@ -12,7 +12,6 @@ BrBrPatapim = Brainrot(name="Бр бр патапим", cost=140, damage=40)
 CrocodiloBombordilo = Brainrot(name="Крокодило бомбордило", cost=220, damage=80)
 TralaleiloTralala = Brainrot(name="Тралалейло тралала", cost=80)
 
-
 DevMode = 0
 BrainrotsList = [BrBrPatapim, CrocodiloBombordilo, TralaleiloTralala]    #  список всех персонажей
 Inventory = []    # инвентарь
@@ -32,13 +31,6 @@ def PrintInventory():   #   вывод инвентаря
         print(f"У вас {Money} грн")
         for x in range(len(Inventory)):
             print(f"{Inventory[x].name}: здоров'я: {Inventory[x].hp}, сила: {Inventory[x].damage}")
-#        if gold == 1:
-#            if int(input(f"({len(Inventory)+1}) Перетворити персонажа на золотого ({len(Inventory)+2}) Вихід: ")) == len(Inventory)+1:
-#                for x in range(len(Inventory)):
-#                    print(f"({x + 1}) {Inventory[x].name}")
-#                Inventory[int(input("Якого персонажа ви хочете перетворити на золотого?: "))-1].hp*10
-#                Inventory[int(input("Якого персонажа ви хочете перетворити на золотого?: "))-1].damage*10
-#                gold=gold-1
 
 def Market():
     global Money
