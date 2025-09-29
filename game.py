@@ -7,18 +7,22 @@ class Brainrot:    #    создаю класс персонажей
         self.hp=hp
         self.damage=damage
 
-#   тут создаю всех персонажей
-BrBrPatapim = Brainrot(name="Бр бр патапим", cost=140, damage=40)
-CrocodiloBombordilo = Brainrot(name="Крокодило бомбордило", cost=220, damage=80)
-TralaleiloTralala = Brainrot(name="Тралалейло тралала", cost=80)
-
-DevMode = 0
-BrainrotsList = [BrBrPatapim, CrocodiloBombordilo, TralaleiloTralala]    #  список всех персонажей
+BrainrotsList = []    #  список всех персонажей
 Inventory = []    # инвентарь
 Money = 100
 gold = 1
 
-def PrintInventory():   #   вывод инвентаря
+def CreateCharacters():
+    global BrainrotsList
+    BrBrPatapim = Brainrot(name="Бр бр патапим", cost=140, damage=40)
+    CrocodiloBombordilo = Brainrot(name="Крокодило бомбордило", cost=220, damage=80)
+    TralaleiloTralala = Brainrot(name="Тралалейло тралала", cost=80)
+
+    BrainrotsList.append(BrBrPatapim)
+    BrainrotsList.append(CrocodiloBombordilo)
+    BrainrotsList.append(TralaleiloTralala)
+
+def PrintInventory():
     global gold
     if Inventory == []:
         print("У вас немає брейнротів")
@@ -75,19 +79,42 @@ def battle():
             sleep(1)
             PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака: "))
             EnemyBattleInput = randint(1, 3)
-            if PlayerBattleInput == 1 and EnemyBattleInput != 2:
-                BattleEnemyHp = BattleEnemyHp - Inventory[0].damage
-                print(f"{BattleEnemyHp}")
-                print(f"Ваш суперник пропускає удар!")
-            elif PlayerBattleInput == 1 and EnemyBattleInput == 2:
-                print(f"Ваш суперник захищаеться!")
-            elif PlayerBattleInput != 2 and EnemyBattleInput == 1:
-                BattlePlayerHp = BattlePlayerHp - BattleEnemyVariable.damage
-                print(f"{BattlePlayerHp}")
-                print(f"Ви пропускаєте удар!")
 
+            if PlayerBattleInput == 1 and EnemyBattleInput == 1:  # Оба атакуют
+                BattleEnemyHp -= Inventory[0].damage
+                BattlePlayerHp -= BattleEnemyVariable.damage
+                print("Обидва атакують і отримують ушкодження")
+
+            elif PlayerBattleInput == 1 and EnemyBattleInput == 2:  # Игрок атакует, враг защищается
+                print("Ваш суперник захищається")
+
+            elif PlayerBattleInput == 1 and EnemyBattleInput == 3:  # Игрок атакует, враг контратакует
+                BattlePlayerHp -= BattleEnemyVariable.damage
+                print("Ви пропускаєте удар")
+
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 1:  # Игрок защищается, враг атакует
+                print("Ви захищаєтесь")
+
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 2:  # Оба защищаются
+                print("Обидва захищаються, нічого не відбувається")
+
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 3:  # Игрок защищается, враг контратакует
+                print("У суперника не вийшло контр-атакувати")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 1:  # Игрок контратакует, враг атакует
+                BattleEnemyHp -= Inventory[0].damage
+                print("Ваш суперник пропускає удар")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 2:  # Игрок контратакует, враг защищается
+                print("Не вийшло — суперник не атакував.")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 3:  # Оба контратакуют
+                print("Обидва чекають моменту для контр-атаки, але ніхто не атакує.")
+        if BattleEnemyHp <= 0:
+            Money += BattleEnemyVariable.hp*BattleEnemyVariable.damage/500
+            print(f"Ви перемогли! Ось ваші {BattleEnemyVariable.hp*BattleEnemyVariable.damage/500} монет")
+            
 def MainMenu():
-    global DevMode
     MainMenuInput = input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: ")
     if MainMenuInput == "1":
         sleep(1)
@@ -108,5 +135,9 @@ def MainMenu():
     else:
         pass
 
-while 1:
-    MainMenu()
+def Game():
+    CreateCharacters()
+    while 1:
+        MainMenu()
+
+Game()
