@@ -2,6 +2,17 @@ from time import sleep
 from random import randint
 from tkinter import *
 
+def License():
+    window = Tk()
+    window.title("Ліцензійна угода")
+    window.geometry("542x100")
+    window.resizable(False, False)
+    photo = PhotoImage(file="License.ppm")
+    image_label = Label(window, image=photo)
+    image_label.pack(padx=20, pady=20)
+    image_label.image = photo
+    window.mainloop()
+
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20, gold=0):
         self.name=name
