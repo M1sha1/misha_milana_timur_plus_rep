@@ -25,18 +25,13 @@ def CreateCharacters():
     BrainrotsList.append(TralaleiloTralala)
 
 def PrintInventory():
-<<<<<<< HEAD
     global Gold
-=======
-    global gold
->>>>>>> b9af93b50dbe9e88f0a8e473cec0208389e11fba
     if Inventory == []:
         print("У вас немає брейнротів")
     else:
         print(f"У вас {Money} грн")
         for x in range(len(Inventory)):
             print(f"{Inventory[x].name}: здоров'я: {Inventory[x].hp}, сила: {Inventory[x].damage}")
-<<<<<<< HEAD
         if Gold >= 1:
             GoldBoolInput = int(input("Вимаєте золоте покращення, (1) Використати (2) Вийти: "))
             if GoldBoolInput == 1:
@@ -57,8 +52,6 @@ def PrintInventory():
                 print(f"{Inventory[GoldInput-1].name}: здоров'я: {Inventory[GoldInput-1].hp}, сила: {Inventory[GoldInput-1].damage}")
             else:
                 pass
-=======
->>>>>>> b9af93b50dbe9e88f0a8e473cec0208389e11fba
 
 def Market():
     global Money
@@ -140,17 +133,12 @@ def battle():
             elif PlayerBattleInput == 3 and EnemyBattleInput == 3:  # Оба контратакуют
                 print("Обидва чекають моменту для контр-атаки, але ніхто не атакує.")
         if BattleEnemyHp <= 0:
-<<<<<<< HEAD
             Money += 20
             print(f"Ви перемогли! Ось ваші 20 монет")
         else:
             Inventory.remove(0)
             print("Ви програли! И ваш брейнрот помер")
-=======
-            Money += BattleEnemyVariable.hp*BattleEnemyVariable.damage/500
-            print(f"Ви перемогли! Ось ваші {BattleEnemyVariable.hp*BattleEnemyVariable.damage/500} монет")
->>>>>>> b9af93b50dbe9e88f0a8e473cec0208389e11fba
-            
+
 def MainMenu():
     MainMenuInput = input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: ")
     if MainMenuInput == "1":
