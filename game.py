@@ -1,5 +1,6 @@
 from time import sleep
 from random import randint
+from tkinter import *
 
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20, gold=0):
@@ -13,6 +14,17 @@ BrainrotsList = []    #  список всех персонажей
 Inventory = []    # инвентарь
 Money = 100
 Gold = 0
+
+def License():
+    window = Tk()
+    window.title("Ліцензійна угода")
+    window.geometry("542x100")
+    window.resizable(False, False)
+    photo = PhotoImage(file="License.ppm")
+    image_label = Label(window, image=photo)
+    image_label.pack(padx=20, pady=20)
+    image_label.image = photo
+    window.mainloop()
 
 def CreateCharacters():
     global BrainrotsList
@@ -161,6 +173,7 @@ def MainMenu():
         pass
 
 def Game():
+    License()
     CreateCharacters()
     while 1:
         MainMenu()
