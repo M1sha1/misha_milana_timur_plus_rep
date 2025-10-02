@@ -15,7 +15,7 @@ LicenseAccepted = 0
 BrainrotsList = []    #  список всех персонажей
 Inventory = []    # инвентарь
 Money = 100
-Gold = 2
+Gold = 0
 
 def License():
     def accept():
