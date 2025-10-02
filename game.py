@@ -2,17 +2,6 @@ from time import sleep
 from random import randint
 from tkinter import *
 
-def License():
-    window = Tk()
-    window.title("Ліцензійна угода")
-    window.geometry("542x100")
-    window.resizable(False, False)
-    photo = PhotoImage(file="License.ppm")
-    image_label = Label(window, image=photo)
-    image_label.pack(padx=20, pady=20)
-    image_label.image = photo
-    window.mainloop()
-
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20, gold=0):
         self.name=name
@@ -21,20 +10,30 @@ class Brainrot:    #    создаю класс персонажей
         self.damage=damage
         self.gold=gold
 
+LicenseAccepted = 0
+
 BrainrotsList = []    #  список всех персонажей
 Inventory = []    # инвентарь
 Money = 100
-Gold = 0
+Gold = 2
 
 def License():
+    def accept():
+        global LicenseAccepted
+        LicenseAccepted = 1
+        window.destroy()
     window = Tk()
     window.title("Ліцензійна угода")
-    window.geometry("542x100")
+    window.geometry("542x135")
     window.resizable(False, False)
     photo = PhotoImage(file="License.ppm")
     image_label = Label(window, image=photo)
     image_label.pack(padx=20, pady=20)
     image_label.image = photo
+    aceeptbutton = Button(window, width = 15, height = 10, text = "Я згоден", command = accept)
+    aceeptbutton.pack(side=RIGHT)
+    declinebutton = Button(window, width = 15, height = 10, text = "Я не згоден", state = "disabled")
+    declinebutton.pack(side=RIGHT)
     window.mainloop()
 
 def CreateCharacters():
@@ -68,11 +67,17 @@ def PrintInventory():
                     print(f"({x+1}) {Inventory[x].name}:", end=" ")
                 GoldInput = int(input())
                 Gold -= 1
-                Inventory[GoldInput-1].gold = 1
-                Inventory[GoldInput-1].name = "Золотий " + Inventory[GoldInput-1].name
-                Inventory[GoldInput-1].damage = Inventory[GoldInput-1].damage * 2
-                Inventory[GoldInput-1].hp = Inventory[GoldInput-1].hp * 2
-                print(f"{Inventory[GoldInput-1].name}: здоров'я: {Inventory[GoldInput-1].hp}, сила: {Inventory[GoldInput-1].damage}")
+                if Inventory[GoldInput-1].gold != 2:
+                    if Inventory[GoldInput-1].gold == 1:
+                        Inventory[GoldInput-1].name = "Алмазний " + Inventory[GoldInput-1].name.replace("Золотий ", "")
+                    else:
+                        Inventory[GoldInput-1].name = "Золотий " + Inventory[GoldInput-1].name
+                    Inventory[GoldInput-1].gold = 1
+                    Inventory[GoldInput-1].damage = Inventory[GoldInput-1].damage * 2
+                    Inventory[GoldInput-1].hp = Inventory[GoldInput-1].hp * 2
+                    print(f"{Inventory[GoldInput-1].name}: здоров'я: {Inventory[GoldInput-1].hp}, сила: {Inventory[GoldInput-1].damage}")
+                else:
+                    print("Цей брейнрот вже має алмазне покращення")
             else:
                 pass
 
@@ -184,9 +189,11 @@ def MainMenu():
         pass
 
 def Game():
+    global LicenseAccepted
     License()
-    CreateCharacters()
-    while 1:
-        MainMenu()
+    if LicenseAccepted == 1:
+        CreateCharacters()
+        while 1:
+            MainMenu()
 
 Game()
