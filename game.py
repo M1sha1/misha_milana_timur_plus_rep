@@ -36,12 +36,15 @@ def License():
     declinebutton.pack(side=RIGHT)
     window.mainloop()
 
+License()
+
 def CreateCharacters(**kwargs):
     global BrainrotsList
     for key, value in kwargs.items():
-        print(f"{key} = {value[0], value[1], value[2]}")
         key = Brainrot(value[0], value[1], value[2])
         BrainrotsList.append(key)
+
+CreateCharacters(brbrpatapim = ("Бр бр патапим", 140, 100, 40), CrocodiloBombordilo = ("Крокодило бомбордило", 220, 100, 80), TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20))
 
 def PrintInventory():
     global Gold
@@ -187,9 +190,7 @@ def MainMenu():
 
 def Game():
     global LicenseAccepted
-    License()
     if LicenseAccepted == 1:
-        CreateCharacters(brbrpatapim = ("Бр бр патапим", 140, 100, 40), CrocodiloBombordilo = ("Крокодило бомбордило", 220, 100, 80), TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20))
         while 1:
             MainMenu()
 
