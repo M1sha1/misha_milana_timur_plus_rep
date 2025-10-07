@@ -1,6 +1,17 @@
 from time import sleep
 from random import randint
 from tkinter import *
+from notifypy import Notify
+import webbrowser
+import pyttsx3
+
+noti = Notify()
+noti.title = "Дякую!"
+noti.message = "Ви самі погодились😉"
+
+engine = pyttsx3.init()
+engine.say("Я Черныыыый")
+engine.runAndWait()
 
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20, gold=0):
@@ -36,15 +47,15 @@ def License():
     declinebutton.pack(side=RIGHT)
     window.mainloop()
 
-License()
-
 def CreateCharacters(**kwargs):
     global BrainrotsList
     for key, value in kwargs.items():
-        key = Brainrot(value[0], value[1], value[2])
+        key = Brainrot(value[0], value[1], value[2], value[3])
         BrainrotsList.append(key)
 
-CreateCharacters(brbrpatapim = ("Бр бр патапим", 140, 100, 40), CrocodiloBombordilo = ("Крокодило бомбордило", 220, 100, 80), TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20))
+CreateCharacters(brbrpatapim = ("Бр бр патапим", 140, 100, 40), 
+                 CrocodiloBombordilo = ("Крокодило бомбордило", 220, 100, 80), 
+                 TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20))
 
 def PrintInventory():
     global Gold
@@ -127,45 +138,80 @@ def battle():
         print(f"Ваш суперник: {BattleEnemyVariable.name}, здоров'я: {BattleEnemyVariable.hp}, сила: {BattleEnemyVariable.damage}")
         while BattleEnemyHp > 0 and BattlePlayerHp > 0:
             sleep(1)
-            PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака: "))
-            EnemyBattleInput = randint(1, 3)
+            PlayerBattleInput = int(input("(1) Атака (2) Захист (3) Контр-атака (4) Ризиковий удар: "))
+            EnemyBattleInput = randint(1, 4)
 
-            if PlayerBattleInput == 1 and EnemyBattleInput == 1:  # Оба атакуют
+            if PlayerBattleInput == 1 and EnemyBattleInput == 1:
                 BattleEnemyHp -= Inventory[0].damage
                 BattlePlayerHp -= BattleEnemyVariable.damage
-                print("Обидва атакують і отримують ушкодження")
+                print("Обидва атакують і отримують ушкодження!")
 
-            elif PlayerBattleInput == 1 and EnemyBattleInput == 2:  # Игрок атакует, враг защищается
-                print("Ваш суперник захищається")
+            elif PlayerBattleInput == 1 and EnemyBattleInput == 2:
+                print("Суперник захищаєтьcя!")
 
-            elif PlayerBattleInput == 1 and EnemyBattleInput == 3:  # Игрок атакует, враг контратакует
+            elif PlayerBattleInput == 1 and EnemyBattleInput == 3:
                 BattlePlayerHp -= BattleEnemyVariable.damage
-                print("Ви пропускаєте удар")
+                print("Ви пропускаєте контр-атаку!")
 
-            elif PlayerBattleInput == 2 and EnemyBattleInput == 1:  # Игрок защищается, враг атакует
-                print("Ви захищаєтесь")
+            elif PlayerBattleInput == 1 and EnemyBattleInput == 4:
+                BattlePlayerHp -= BattleEnemyVariable.damage * 1.5
+                print("Суперник робить ризикований удар! Ви отримуєте потужний урон!")
 
-            elif PlayerBattleInput == 2 and EnemyBattleInput == 2:  # Оба защищаются
-                print("Обидва захищаються, нічого не відбувається")
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 1:
+                print("Ви захищаєтесь від атаки!")
 
-            elif PlayerBattleInput == 2 and EnemyBattleInput == 3:  # Игрок защищается, враг контратакует
-                print("У суперника не вийшло контр-атакувати")
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 2:
+                print("Обидва захищаються, нічого не відбувається.")
 
-            elif PlayerBattleInput == 3 and EnemyBattleInput == 1:  # Игрок контратакует, враг атакует
-                BattleEnemyHp -= Inventory[0].damage
-                print("Ваш суперник пропускає удар")
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 3:
+                print("Суперник намагався контр-атакувати, але ви не атакували.")
 
-            elif PlayerBattleInput == 3 and EnemyBattleInput == 2:  # Игрок контратакует, враг защищается
-                print("Не вийшло — суперник не атакував.")
+            elif PlayerBattleInput == 2 and EnemyBattleInput == 4:
+                print("Суперник робить ризикований удар, але ви блокуєте частину шкоди!")
 
-            elif PlayerBattleInput == 3 and EnemyBattleInput == 3:  # Оба контратакуют
-                print("Обидва чекають моменту для контр-атаки, але ніхто не атакує.")
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 1:
+                BattleEnemyHp -= Inventory[0].damage * 1.5
+                print("Ви успішно контратакували! Суперник отримує посилений удар!")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 2:
+                print("Контр-атака не спрацювала — суперник не атакував.")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 3:
+                print("Обидва контратакують — ніхто не атакує.")
+
+            elif PlayerBattleInput == 3 and EnemyBattleInput == 4:
+                BattlePlayerHp -= BattleEnemyVariable.damage
+                print("Суперник зробив ризикований удар, поки ви чекали моменту!")
+
+            elif PlayerBattleInput == 4 and EnemyBattleInput == 1:
+                # 50% шанс, что промахнется
+                if randint(1, 2) == 1:
+                    BattleEnemyHp -= Inventory[0].damage * 2
+                    print("Ваш ризикований удар влучив! Величезна шкода ворогу!")
+                else:
+                    BattlePlayerHp -= BattleEnemyVariable.damage
+                    print("Ви промахнулись і отримали удар у відповідь!")
+
+            elif PlayerBattleInput == 4 and EnemyBattleInput == 2:
+                print("Суперник захищаєтьcя — ваш ризикований удар не завдав шкоди.")
+
+            elif PlayerBattleInput == 4 and EnemyBattleInput == 3:
+                BattleEnemyHp -= Inventory[0].damage * 2
+                print("Ви застали суперника зненацька під час контр-атаки! Потужний удар!")
+
+            elif PlayerBattleInput == 4 and EnemyBattleInput == 4:
+                print("Обидва роблять ризиковані удари — промахи з обох сторін!")
+
         if BattleEnemyHp <= 0:
             Money += 20
             print(f"Ви перемогли! Ось ваші 20 монет")
+            engine.say("Ви перемогли! Ось ваші 20 монет")
+            engine.runAndWait()
         else:
-            Inventory.remove(0)
+            Inventory.remove(Inventory[0])
             print("Ви програли! И ваш брейнрот помер")
+            engine.say("Ви програли! И ваш брейнрот помер")
+            engine.runAndWait()
 
 def MainMenu():
     MainMenuInput = input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: ")
@@ -178,19 +224,25 @@ def MainMenu():
         Market()
         sleep(1)
     elif MainMenuInput == "3":
+        sleep(1)
         battle()
+        sleep(1)
     elif MainMenuInput == "4":
         sleep(1)
         print("Номер карти: 5168 7520 #### 4667")
         sleep(1)
     elif MainMenuInput == "5":
         pass
+    elif MainMenuInput == "6":
+        webbrowser.open("https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1")
     else:
         pass
 
 def Game():
     global LicenseAccepted
+    License()
     if LicenseAccepted == 1:
+        noti.send()
         while 1:
             MainMenu()
 
