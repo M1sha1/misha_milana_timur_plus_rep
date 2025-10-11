@@ -282,7 +282,7 @@ def MainMenu():
         sleep(1)
     elif MainMenuInput == "4":
         sleep(1)
-        print("Номер карти: 5168 7520 #### 4667")
+        print("Номер карти: Міша-5168 7520 #### 4667, Тімур-1487 5242 1234 6767, Мілана-9254 4857 6484 5282")
         sleep(1)
     elif MainMenuInput == "5":
         Casino()
