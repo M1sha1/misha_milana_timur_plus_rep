@@ -93,67 +93,66 @@ def Casino():
     global Gold
     if Money <= 0:
         print("ти умер в нішете задонать на 1487 5242 1234 6767 щоб продолжити")
-        if input("ставіть(1) гонка(2) калесо смерті(3)") == "1":
-            ctavka = input("тімур скібідіст сколька ставіш")
+    if input("ставіть(1) гонка(2) калесо смерті(3)") == "1":
+        ctavka = input("тімур скібідіст сколька ставіш")
 
-            oneclot = random.randint(0, 50);
-            twoclot = random.randint(1, 2)
-            print(oneclot, twoclot)
-            if oneclot == 0:
-                Money += 9 * ctavka
-                Gold += 1
-                print(Money)
-            if oneclot == 1 and twoclot == 1:
-                Money += 2 * ctavka
-                print(Money)
-            if oneclot == 2 and twoclot == 2:
-                Money += 2 * ctavka
-                print(Money)
-            if oneclot == 42 and twoclot == 2:
-                Money += 3 * ctavka
-                print(Money)
-            if oneclot == 5 and twoclot == 2:
-                Money += 2 * ctavka
-                print(Money)
-            if oneclot == 4 and twoclot == 2:
-                Money += 2 * ctavka
-                print(Money)
-            if oneclot == 42 and twoclot == 2:
-                Money += 2 * ctavka
-                print(Money)
-        if input("ставіть(1) гонка(2) калесо смерті(3)") == "2":
-            stavka2 = input("тімур скібідіст сколька ставіш")
-
-            blablalbla = input("хто 1 чи 2")
-            ujyrf = random.randint(1, 2)
-            if blablalbla == 1 and ujyrf == 1:
-                Money += 2 * stavka2
-                print(Money)
-            if blablalbla == 2 and ujyrf == 2:
-                Money += 2 * stavka2
-                print(Money)
-            if blablalbla == 1 and ujyrf == 2:
-                Money -= stavka2
-                print(Money)
-            if blablalbla == 2 and ujyrf == 1:
-                Money -= stavka2
-                print(Money)
-        if input("ставіть(1) гонка(2) калесо смерті(3)") == "3":
-            ujyrf1 = random.randint(1, 8)
-            if ujyrf1 == 1:
-                Money += 999
-                print(Money)
-            if ujyrf1 == 8:
-                Gold += 1
-                print(Money)
-            else:
-                Money -= 999
-                print(Money)
-        if input("ставіть(1) гонка(2) калесо смерті(3)") == "67":
-            print ("this sekret")
-            Gold -= 1
+        oneclot = random.randint(0, 50);
+        twoclot = random.randint(1, 2)
+        print(oneclot, twoclot)
+        if oneclot == 0:
+            Money += 9 * ctavka
+            Gold += 1
             print(Money)
+        if oneclot == 1 and twoclot == 1:
+            Money += 2 * ctavka
+            print(Money)
+        if oneclot == 2 and twoclot == 2:
+            Money += 2 * ctavka
+            print(Money)
+        if oneclot == 42 and twoclot == 2:
+            Money += 3 * ctavka
+            print(Money)
+        if oneclot == 5 and twoclot == 2:
+            Money += 2 * ctavka
+            print(Money)
+        if oneclot == 4 and twoclot == 2:
+            Money += 2 * ctavka
+            print(Money)
+        if oneclot == 42 and twoclot == 2:
+            Money += 2 * ctavka
+            print(Money)
+    if input("ставіть(1) гонка(2) калесо смерті(3)") == "2":
+        stavka2 = input("тімур скібідіст сколька ставіш")
 
+        blablalbla = input("хто 1 чи 2")
+        ujyrf = random.randint(1, 2)
+        if blablalbla == 1 and ujyrf == 1:
+            Money += 2 * stavka2
+            print(Money)
+        if blablalbla == 2 and ujyrf == 2:
+            Money += 2 * stavka2
+            print(Money)
+        if blablalbla == 1 and ujyrf == 2:
+            Money -= stavka2
+            print(Money)
+        if blablalbla == 2 and ujyrf == 1:
+            Money -= stavka2
+            print(Money)
+    if input("ставіть(1) гонка(2) калесо смерті(3)") == "3":
+        ujyrf1 = random.randint(1, 8)
+        if ujyrf1 == 1:
+            Money += 999
+            print(Money)
+        if ujyrf1 == 8:
+            Gold += 1
+            print(Money)
+        else:
+            Money -= 999
+            print(Money)
+    if input("ставіть(1) гонка(2) калесо смерті(3)") == "67":
+        print("this sekret")
+        Gold -= 1
+        print(Money)
 
 def Market():
     global Money
