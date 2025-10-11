@@ -148,6 +148,11 @@ def Casino():
             else:
                 Money -= 999
                 print(Money)
+        if input("ставіть(1) гонка(2) калесо смерті(3)") == "67":
+            print ("this sekret")
+            Gold -= 1
+            print(Money)
+
 
 def Market():
     global Money
