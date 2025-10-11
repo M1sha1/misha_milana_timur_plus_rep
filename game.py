@@ -45,7 +45,12 @@ def CreateCharacters(**kwargs):
 
 CreateCharacters(brbrpatapim = ("Бр бр патапим", 140, 100, 40), 
                  CrocodiloBombordilo = ("Крокодило бомбордило", 220, 100, 80), 
-                 TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20))
+                 TralaleiloTralala = ("Тралалейло тралала", 80, 100, 20),
+                 Ballerinacappuccino = ("Балерина капучино", 30, 100, 10),
+                 TungTungTungSahur = ("Тунг тунг тунг сахур", 180, 100, 55),
+                 BombombiniGusini = ("Бомбомбіні гусіні", 200, 100, 70),
+                 CapuchinoAssassino = ("Капучино ассассіно", 320, 110, 120),
+                 LirilìLarilà = ("Лірілі ларіла", 100, 100, 30))
 
 def PrintInventory():
     global Gold
