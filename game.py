@@ -1,17 +1,7 @@
 from time import sleep
 from random import randint
 from tkinter import *
-from notifypy import Notify
 import webbrowser
-import pyttsx3
-
-noti = Notify()
-noti.title = "Дякую!"
-noti.message = "Ви самі погодились😉"
-
-engine = pyttsx3.init()
-engine.say("Я Черныыыый")
-engine.runAndWait()
 
 class Brainrot:    #    создаю класс персонажей
     def __init__(self, name="Untitled", cost=100, hp=100, damage=20, gold=0):
@@ -205,13 +195,9 @@ def battle():
         if BattleEnemyHp <= 0:
             Money += 20
             print(f"Ви перемогли! Ось ваші 20 монет")
-            engine.say("Ви перемогли! Ось ваші 20 монет")
-            engine.runAndWait()
         else:
             Inventory.remove(Inventory[0])
             print("Ви програли! И ваш брейнрот помер")
-            engine.say("Ви програли! И ваш брейнрот помер")
-            engine.runAndWait()
 
 def MainMenu():
     MainMenuInput = input("(1) Інвентар (2) Магазин (3) Арена (4) Донат (5) Казино: ")
@@ -242,7 +228,6 @@ def Game():
     global LicenseAccepted
     License()
     if LicenseAccepted == 1:
-        noti.send()
         while 1:
             MainMenu()
 
